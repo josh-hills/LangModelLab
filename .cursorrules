@@ -1,0 +1,38 @@
+# .cursorrules - FigureGPT Project Guide
+
+## Project Overview
+FigureGPT is an educational project that guides learners through the evolution of language models - from simple statistical approaches to complex multi-modal architectures. Each lesson builds incrementally on previous concepts, providing hands-on experience with increasingly sophisticated models.
+
+## Course Structure
+1. **Bigram Model**: Statistical foundations of language modeling
+2. **N-gram Extensions**: Higher-order models and their limitations
+3. **Word Embeddings**: Continuous vector representations
+4. **Recurrent Networks**: Sequence modeling with RNNs/LSTMs
+5. **Transformers**: Self-attention and modern architectures
+6. **Multi-modal Models**: Integrating text with other modalities
+
+## Build & Run Commands
+- Setup: `pip install -e .`
+- Train model: `python train.py --config configs/default.py`
+- Inference: `python sample.py --model_path models/checkpoint.pt`
+- Run tests: `pytest tests/`
+- Run single test: `pytest tests/test_file.py::test_function -v`
+- Lint: `flake8 src/ tests/`
+- Type check: `mypy src/ tests/`
+
+## Code Style Guidelines
+- Use Python type hints throughout
+- Format with black (line length 88)
+- Sort imports with isort
+- Follow PEP 8 naming: snake_case for functions/variables, CamelCase for classes
+- Docstrings: Google style with type annotations
+- Error handling: Use specific exceptions with informative messages
+- Organize imports: stdlib → third-party → local
+- Include unit tests for all new functionality
+- Keep functions under 50 lines, modules under 500 lines
+
+## Getting Started
+1. Clone the repository
+2. Install dependencies: `pip install -e .`
+3. Navigate to `lessons/01_bigram_model/` to begin
+4. Follow the README in each lesson folder for guidance
