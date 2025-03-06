@@ -4,8 +4,6 @@
 
 ## Overview
 
-LangModelLab is a hands-on educational journey through the evolution of language models - from simple statistical approaches to advanced neural architectures. Each lesson builds incrementally on previous concepts, providing practical implementations with increasingly sophisticated models.
-
 The course is designed as a step-by-step laboratory experience through the following progression:
 
 1. **Bigram Model**: Statistical foundations of language modeling | DONE
