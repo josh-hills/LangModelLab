@@ -2,8 +2,6 @@
 
 ## 🚧 Project Status: Early Development 🚧
 
-LangModelLab is currently in early development. The course structure and initial lessons are being designed, but the project is not yet ready for general use. We appreciate your interest and invite you to star the repository to stay updated on our progress.
-
 ## Overview
 
 LangModelLab is a hands-on educational journey through the evolution of language models - from simple statistical approaches to advanced neural architectures. Each lesson builds incrementally on previous concepts, providing practical implementations with increasingly sophisticated models.
