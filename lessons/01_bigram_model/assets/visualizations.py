@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 import seaborn as sns
 from matplotlib.patches import Rectangle, FancyArrowPatch
 
@@ -10,7 +11,7 @@ sns.set_context("notebook", font_scale=1.2)
 def create_tokenization_diagram():
     """Create the original tokenization diagram."""
     fig, ax = plt.subplots(figsize=(10, 5))
-    text = "We love language models"
+    text = "We study language models"
     
     chars = sorted(list(set(text + " ")))
     str_to_i = {ch: i for i, ch in enumerate(chars)}
@@ -138,8 +139,89 @@ def create_bigram_diagram():
     plt.savefig('bigram_model_diagram.png', dpi=150, bbox_inches='tight')
     plt.close()
 
+def create_loss_minimization_diagram():
+    """Create a visualization explaining what loss minimization means for a bigram model."""
+    # Create figure with two subplots
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+    
+    # Example character and its possible next characters
+    current_char = 't'
+    next_chars = ['h', 'e', 'a', 'o', 'i', ' ', 'r']
+    
+    # Ground truth distribution (from data)
+    true_probs = np.array([0.35, 0.25, 0.15, 0.10, 0.08, 0.05, 0.02])
+    
+    # Model predictions at different training stages
+    initial_probs = np.array([0.14, 0.15, 0.13, 0.14, 0.15, 0.14, 0.15])  # Random (high loss)
+    mid_probs = np.array([0.25, 0.20, 0.18, 0.12, 0.10, 0.08, 0.07])      # Partially trained
+    final_probs = np.array([0.33, 0.24, 0.16, 0.11, 0.09, 0.05, 0.02])    # Well trained (low loss)
+    
+    # Calculate cross-entropy loss for each stage
+    def cross_entropy(pred, true):
+        # Add small epsilon to avoid log(0)
+        pred = np.clip(pred, 1e-10, 1.0)
+        return -np.sum(true * np.log(pred))
+    
+    initial_loss = cross_entropy(initial_probs, true_probs)
+    mid_loss = cross_entropy(mid_probs, true_probs)
+    final_loss = cross_entropy(final_probs, true_probs)
+    
+    # Left plot: Bar chart comparing distributions
+    x = np.arange(len(next_chars))
+    width = 0.2
+    
+    # Plot the bars
+    ax1.bar(x - width, true_probs, width, label='True Distribution', color='#2ca02c', alpha=0.7)
+    ax1.bar(x, initial_probs, width, label=f'Initial Model (Loss: {initial_loss:.2f})', color='#d62728', alpha=0.7)
+    ax1.bar(x + width, final_probs, width, label=f'Trained Model (Loss: {final_loss:.2f})', color='#1f77b4', alpha=0.7)
+    
+    # Add labels and title
+    ax1.set_ylabel('Probability')
+    ax1.set_title(f'Probability Distribution After Character "{current_char}"')
+    ax1.set_xticks(x)
+    ax1.set_xticklabels([f"'{c}'" for c in next_chars])
+    ax1.legend()
+    
+    # Right plot: Loss curve during training
+    training_steps = np.arange(0, 101)
+    # Simulate exponentially decreasing loss
+    losses = 2.0 * np.exp(-0.03 * training_steps) + 0.5
+    
+    # Mark our three example points
+    example_steps = [0, 40, 100]
+    example_losses = [initial_loss, mid_loss, final_loss]
+    
+    # Plot the loss curve
+    ax2.plot(training_steps, losses, color='#ff7f0e', linewidth=2)
+    ax2.scatter(example_steps, example_losses, color=['#d62728', '#ff7f0e', '#1f77b4'], s=100, zorder=5)
+    
+    # Add annotations for the example points
+    ax2.annotate('Initial (Random)', xy=(0, initial_loss), xytext=(5, initial_loss+0.2),
+                arrowprops=dict(arrowstyle='->'))
+    ax2.annotate('Partially Trained', xy=(40, mid_loss), xytext=(45, mid_loss+0.2),
+                arrowprops=dict(arrowstyle='->'))
+    ax2.annotate('Well Trained', xy=(100, final_loss), xytext=(80, final_loss+0.2),
+                arrowprops=dict(arrowstyle='->'))
+    
+    # Add labels and title
+    ax2.set_xlabel('Training Steps')
+    ax2.set_ylabel('Loss (Cross-Entropy)')
+    ax2.set_title('Loss Minimization During Training')
+    ax2.set_ylim(0, 3)
+    
+    # Add explanation text
+    fig.text(0.5, 0.01, 
+             "Minimizing loss means making the model's predicted probabilities closer to the true distribution.\n"
+             "Lower loss = better predictions = more realistic text generation.", 
+             ha='center', fontsize=12, bbox=dict(facecolor='#f0f0f0', alpha=0.5))
+    
+    plt.tight_layout(rect=[0, 0.05, 1, 0.95])
+    plt.savefig('loss_minimization_diagram.png', dpi=150, bbox_inches='tight')
+    plt.close()
+
 if __name__ == "__main__":
-    # Create both diagrams
+    # Create all diagrams
     create_tokenization_diagram()
     create_bigram_diagram()
+    create_loss_minimization_diagram()
     print("Diagrams created successfully!")
