@@ -15,17 +15,16 @@ By the end of this lesson, you will:
 4. Generate text using a trained bigram model
 5. Evaluate the limitations of simple statistical models - yes, bigrams kind of suck
 
-## Prerequisites (please let me know if you want a lesson 0, covering these basics)
+## Prerequisites (please let me know if you want a lesson 0, covering the basics)
 
 - Basic Python programming knowledge
-- Understanding of probability concepts
-- Familiarity with data processing
+- Understanding of probabilities
 
 ## Setup
 
 1. Install the required dependencies:
    ```bash
-   pip install datasets torch numpy matplotlib pandas tqdm
+   pip install -r requirements.txt
    ```
 
 2. Explore interactively:
@@ -33,13 +32,13 @@ By the end of this lesson, you will:
    jupyter notebook explore_bigrams.ipynb
    ```
 
-## Code Walkthrough
+## Code Walkthrough (Come back here if the something in the notebook doesn't click)
 
 The implementation consists of several key components:
 
 ### 1. Data Loading and Preprocessing
 
-We a modified version of the [ArXiv dataset](https://www.kaggle.com/datasets/Cornell-University/arxiv) containing scientific paper summaries. The data is loaded, preprocessed, and split into training and testing sets.
+We are using a modified version of the [ArXiv dataset](https://www.kaggle.com/datasets/Cornell-University/arxiv) containing scientific paper summaries. The data is loaded, preprocessed, and split into training and testing sets.
 
 **Why it matters**: Having high quality training data leads to high quality models, as with many avenues - garbage in, garbage out.
 
@@ -130,12 +129,11 @@ Bigram models have several inherent limitations:
 3. **Lack of semantic understanding**: They model statistical patterns without understanding meaning.
 4. **Repetitive patterns**: Generated text often contains repetitive sequences or gets stuck in loops.
 
-## Further Reading
+## Resources
 
-1. Jurafsky, D., & Martin, J. H. (2009). Speech and Language Processing (2nd Edition). Chapter 4: N-grams.
-2. Manning, C. D., & Schütze, H. (1999). Foundations of Statistical Natural Language Processing. MIT Press.
-3. Chen, S. F., & Goodman, J. (1999). An empirical study of smoothing techniques for language modeling.
-4. Bengio, Y., et al. (2003). A Neural Probabilistic Language Model. Journal of Machine Learning Research.
+1. Jurafsky, D., & Martin, J. H. (2009). [Speech and Language Processing Chapter 3.](https://web.stanford.edu/~jurafsky/slp3/3.pdf)
+2. Karpathy, A (2023). [The spelled-out intro to language modeling: building makemore.](https://www.youtube.com/watch?v=PaCmpygFfXo&t=3861s)
+3. Bengio, Y., et al. (2003). [A Neural Probabilistic Language Model.](https://dl.acm.org/doi/pdf/10.5555/944919.944966)
 
 ## Next Steps
 
