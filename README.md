@@ -28,9 +28,8 @@ The course is designed as a step-by-step lab experience through the following pr
 The project is not yet ready for general use. Once initial lessons are available:
 
 1. Clone the repository
-2. Install dependencies: `pip install -e .`
-3. Navigate to `lessons/01_bigram_model/` to begin
-4. Follow the README in each lesson folder to get started
+2. Navigate to `lessons/01_bigram_model/` to begin
+3. Follow the README in each lesson folder to get started
 
 ## License
 
